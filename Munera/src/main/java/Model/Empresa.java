@@ -1,6 +1,11 @@
 package Model;
 
+import java.io.IOException;
 import java.util.ArrayList;
+
+import Service.CNPJ_Service;
+import Service.testAPI;
+
 
 public class Empresa extends Usuario{
 
@@ -44,4 +49,29 @@ public class Empresa extends Usuario{
         this.postagens = new ArrayList<Postagem>();
         this.clienteInteresse = new ArrayList<Cliente>();
     }
+    
+    public String verStatus() {
+    	try {
+            CNPJ_Service cnpj_Service = new CNPJ_Service();
+            
+            testAPI testapi = cnpj_Service.getStatusCNPJ(this.cnpj);
+            
+            return testapi.getSTATUS().toString();
+            
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return null;
+            
+        } 
+    	
+    }
+    
+    public void mostrarFeed(){
+    	for(Postagem postagem : this.postagens){
+    	System.out.println(postagem.getTextPub());
+    	System.out.println("Curtidas: " + postagem.getCurtidas().size());
+    	System.out.println();
+    	}
+    	}
 }

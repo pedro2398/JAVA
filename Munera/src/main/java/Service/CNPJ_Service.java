@@ -16,11 +16,13 @@ import org.apache.http.util.EntityUtils;
 import com.google.gson.Gson;
 
 
+
+
 public class CNPJ_Service {
    
     public testAPI getStatusCNPJ(String cnpj) throws ClientProtocolException, IOException {
        
-        testAPI cnpj_service = null;
+        testAPI testapi = null;
        
         HttpGet request = new HttpGet("https://api-publica.speedio.com.br/buscarcnpj?cnpj="+cnpj);
        
@@ -36,10 +38,10 @@ public class CNPJ_Service {
                
                 Gson gson = new Gson();
                
-                cnpj_service = gson.fromJson(result, testAPI.class);
+                testapi = gson.fromJson(result, testAPI.class);
             }
         }
        
-        return cnpj_service;
+        return testapi;
     }
 }
